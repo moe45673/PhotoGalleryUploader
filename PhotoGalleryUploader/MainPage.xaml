@@ -2,13 +2,62 @@
     x:Class="PhotoGalleryUploader.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:local="using:PhotoGalleryUploader"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <Page.Resources>
+        <DataTemplate x:Key="PhotosTemplate" >
+            <Viewbox>
+                <Grid
+            Height="300"
+            Width="200"
+            Background="White"
+            BorderBrush="Black"
+            BorderThickness="1">
+                    <controls:ImageEx
+                Source="{Binding}"
+                Stretch="UniformToFill"
+                        
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"/>
+                </Grid>
+            </Viewbox>
+        </DataTemplate>
+    </Page.Resources>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
+        <CommandBar Grid.ColumnSpan="2">
+            <AppBarButton Content="Select Folder" Click="OpenFolderButtonClicked" HorizontalAlignment="Center"/>
+        </CommandBar>
+        <controls:AdaptiveGridView Grid.Row="1" ItemHeight="200"
+            DesiredWidth="300" ItemsSource="{x:Bind Images}" ItemTemplate="{StaticResource PhotosTemplate}">
+            <!--<controls:AdaptiveGridView.ItemTemplate>
+                
+            <DataTemplate x:Name="ImageGalleryDataTemplate">
+                <controls:ImageEx x:Name="imageEx" IsCacheEnabled="True"  Source="Placeholder.png" Height="180" Width="180" Stretch="UniformToFill"/>
+            </DataTemplate>
+            </controls:AdaptiveGridView.ItemTemplate>-->
+                    <!--<controls:AdaptiveGridView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <ItemsWrapGrid MaximumRowsOrColumns="3" Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </controls:AdaptiveGridView.ItemsPanel>-->
+        </controls:AdaptiveGridView>
+        <GridView Grid.Row="1" Grid.Column="1"/>
+
+        <TextBlock Grid.Row="2" x:Name="textBlock"/>
     </Grid>
 </Page>
