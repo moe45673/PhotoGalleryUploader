@@ -63,7 +63,12 @@ namespace PhotoGalleryUploader
                 options = new QueryOptions(CommonFileQuery.DefaultQuery, new[] { ".png", ".jpg", ".bmp", ".tiff", ".jpeg", ".gif" });
                 options.FolderDepth = FolderDepth.Deep;
                 StorageFileQueryResult k = ImgFolder.CreateFileQueryWithOptions(options);
-                Images = await k.GetFilesAsync();
+                var tempImages = await k.GetFilesAsync();
+                foreach(var img in tempImages)
+                {
+                    var tempImg = await img.GetScaledImageAsThumbnailAsync(Windows.Storage.FileProperties.ThumbnailMode.PicturesView);
+                    
+                }
 
                 //await 
 
