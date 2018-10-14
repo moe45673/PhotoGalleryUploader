@@ -95,6 +95,13 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CloudManager.cs" />
+    <Compile Include="Converters\FileToImageThumbnailConverter.cs" />
+    <Compile Include="Converters\InverseBooleanConverter.cs" />
+    <Compile Include="GalleryViewModel.cs" />
+    <Compile Include="Helpers\Batches.cs" />
+    <Compile Include="Helpers\Configurations.cs" />
+    <Compile Include="Helpers\ExtensionMethods.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -112,7 +119,7 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <None Include="app.config" />
+    <Content Include="app.config" />
     <None Include="Connected Services\AzureStorage1\ConnectedService.json" />
     <None Include="PhotoGalleryUploader_TemporaryKey.pfx" />
     <PRIResource Include="Properties\Resources.resw">
