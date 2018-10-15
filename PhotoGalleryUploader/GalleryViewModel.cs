@@ -1,5 +1,5 @@
 ﻿using Microsoft.WindowsAzure.Storage;
-using PhotoGalleryUploader.MVVM;
+using PhotoGalleryUploader.Core.MVVM;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PhotoGalleryUploader.Helpers
+namespace PhotoGalleryUploader.Core.Helpers
 {
-    class FileExtensions
+    public class FileExtensions
     {
         public static readonly string[] Document = new string[] { ".doc", ".xls", ".ppt", ".docx", ".xlsx", ".pptx", ".pdf", ".txt", ".rtf" };
         public static readonly string[] Image = new string[] { ".jpg", ".png", ".bmp", ".gif", ".tif" };

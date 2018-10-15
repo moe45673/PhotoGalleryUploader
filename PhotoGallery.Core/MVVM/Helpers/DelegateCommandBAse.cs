@@ -7,7 +7,7 @@ using System.Windows.Input;
 using System.Threading;
 using Windows.ApplicationModel.Resources.Core;
 
-namespace PhotoGalleryUploader.MVVM
+namespace PhotoGalleryUploader.Core.MVVM
 {
     /// <summary>
     /// An <see cref="ICommand"/> whose delegates can be attached for <see cref="Execute"/> and <see cref="CanExecute"/>.

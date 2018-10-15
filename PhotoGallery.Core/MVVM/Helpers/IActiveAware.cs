@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PhotoGalleryUploader.MVVM
+namespace PhotoGalleryUploader.Core.MVVM
 {
     public interface IActiveAware
     {

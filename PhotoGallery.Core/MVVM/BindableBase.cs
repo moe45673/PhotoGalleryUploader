@@ -8,7 +8,7 @@ using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 
-namespace PhotoGalleryUploader.MVVM
+namespace PhotoGalleryUploader.Core.MVVM
 {
     /// <summary>
     /// Implementation of <see cref="INotifyPropertyChanged"/> to simplify models.

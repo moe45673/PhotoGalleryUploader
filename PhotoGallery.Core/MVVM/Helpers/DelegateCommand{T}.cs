@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Windows.Input;
 
-namespace PhotoGalleryUploader.MVVM
+namespace PhotoGalleryUploader.Core.MVVM
 {
     /// <summary>
     /// An <see cref="ICommand"/> whose delegates can be attached for <see cref="Execute(T)"/> and <see cref="CanExecute(T)"/>.

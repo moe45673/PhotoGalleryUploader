@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq.Expressions;
 
-namespace PhotoGalleryUploader.MVVM
+namespace PhotoGalleryUploader.Core.MVVM
 {
     /// <summary>
     /// Provide a way to observe property changes of INotifyPropertyChanged objects and invokes a 

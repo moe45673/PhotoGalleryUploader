@@ -5,7 +5,7 @@ using Windows.ApplicationModel.Resources.Core;
 
 
 
-namespace PhotoGalleryUploader.MVVM
+namespace PhotoGalleryUploader.Core.MVVM
 {
     ///<summary>
     /// Provides support for extracting property information based on a property expression.
