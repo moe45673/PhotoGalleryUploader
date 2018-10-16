@@ -52,10 +52,8 @@ namespace PhotoGalleryUploader
                 options.FolderDepth = FolderDepth.Deep;
 
                 var k = selectedFolder.CreateFileQueryWithOptions(options);
-
-                ViewModel.SelectedFiles = new ObservableCollection<StorageFile>(await k.GetFilesAsync());    
-                
-                          
+                var result = await k.GetFilesAsync();
+                ViewModel.SelectedFiles = new ObservableCollection<StorageFile>(result);         
             }
             ViewModel.LocalIsBusy = false;
             

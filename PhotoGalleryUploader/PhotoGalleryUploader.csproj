@@ -98,6 +98,7 @@
     <Compile Include="CloudManager.cs" />
     <Compile Include="Converters\FileToImageThumbnailConverter.cs" />
     <Compile Include="Converters\InverseBooleanConverter.cs" />
+    <Compile Include="Converters\StringToUriConverter.cs" />
     <Compile Include="GalleryViewModel.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>

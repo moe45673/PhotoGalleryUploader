@@ -15,18 +15,19 @@ namespace PhotoGalleryUploader.Converters
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            var file = value as StorageFile;
-            //convert file to thumbnail
-            var thumbnail = Task.Run(async () => 
-                await file.ConvertToThumbnailAsync(
-                        mode: ThumbnailMode.PicturesView
-                    )
-                    .ConfigureAwait(false)
-            ).Result;
-            //convert to Bitmap
-            var bmp = new BitmapImage();
-            bmp.SetSource(thumbnail);
-            return bmp;
+            //var file = value as StorageFile;
+            ////convert file to thumbnail
+            //var thumbnail = file.ge
+            ////var thumbnail = file.ConvertToThumbnailAsync(
+            ////            mode: ThumbnailMode.PicturesView
+            ////            ).Result;
+                
+            //var bmp = new BitmapImage();
+            
+
+            //bmp.SetSource(thumbnail);
+
+            return new{ };
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
@@ -34,9 +35,9 @@ namespace PhotoGalleryUploader.Converters
             throw new NotImplementedException();
         }
 
-        
 
-        
+
+
 
     }
 }

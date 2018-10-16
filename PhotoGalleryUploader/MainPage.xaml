@@ -17,25 +17,28 @@
     <Page.Resources>
         <converters:FileToImageThumbnailConverter x:Key="FileToImageThumbnailConverter"/>
         <converters:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
-        <DataTemplate x:Key="PhotosTemplate" x:DataType="storage:StorageFile">
-            
-        <Viewbox>
-                <Grid
+        <converters:StringToUriConverter x:Key="StringToUriConverter"/>
+        <DataTemplate x:Key="PhotosTemplate" x:DataType="storage:StorageFile">            
+        <!--<Viewbox>-->
+                <!--<Grid
                     Height="200"
                     Width="300"
                     Background="White"
                     BorderBrush="Black"
                     BorderThickness="1"
-                    Margin="2">
-                    <controls:ImageEx
-                        Source="{Binding Converter={StaticResource FileToImageThumbnailConverter}}"
-                        IsCacheEnabled="True"
-                        Stretch="UniformToFill"                        
+                    Margin="2">-->
+                    <!--Stretch="UniformToFill"                        
                         HorizontalAlignment="Center"
-                        VerticalAlignment="Center"/>
-
-                </Grid>
-            </Viewbox>
+                        VerticalAlignment="Center"-->
+                    <Image 
+                        Width="200">
+                        <Image.Source>
+                            <BitmapImage 
+                                UriSource="D:\SteamLibrary\steamapps\common\Infinifactory\OST\Test.png"/> <!--{Binding Path=Path, Converter={StaticResource StringToUriConverter}}-->
+                        </Image.Source>
+                    </Image>
+                <!--</Grid>-->
+            <!--</Viewbox>-->
         </DataTemplate>
     </Page.Resources>
     <Grid>
@@ -58,18 +61,19 @@
         
         <controls:AdaptiveGridView Grid.Row="2" ItemHeight="200" DesiredWidth="300" 
                                    Margin="5"
+                                   ScrollViewer.IsHorizontalRailEnabled="False"
                                    ItemsSource="{Binding SelectedFiles, UpdateSourceTrigger=PropertyChanged}"  ItemTemplate="{StaticResource PhotosTemplate}"  
                                    DataFetchSize="1" 
                                    IncrementalLoadingTrigger="Edge" 
                                    IncrementalLoadingThreshold="5" IsEnabled="{Binding LocalIsBusy, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource InverseBooleanConverter}}">            
         </controls:AdaptiveGridView>
 
-        <ProgressRing Grid.Row="1" Grid.RowSpan="2" IsActive="{Binding LocalIsBusy, UpdateSourceTrigger=PropertyChanged}" />
+        <ProgressRing Grid.Row="1" Grid.RowSpan="2" IsActive="{Binding LocalIsBusy, UpdateSourceTrigger=PropertyChanged}"/>
 
         <TextBlock Grid.Row="1" Grid.Column="1" x:Name="textBlock" Margin="20" />
 
-        <GridView Grid.Row="2" Grid.Column="1"/>
-
+        <GridView Grid.Row="2" Grid.Column="1" ScrollViewer.IsHorizontalRailEnabled="False"/>
+        
         
     </Grid>
 </Page>
