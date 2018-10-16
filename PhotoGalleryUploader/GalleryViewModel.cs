@@ -9,7 +9,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Resources.Core;
 using Windows.Storage;
+using Windows.Storage.FileProperties;
 using Windows.UI.Xaml.Media.Imaging;
+using Nito.AsyncEx;
 
 namespace PhotoGalleryUploader
 {
@@ -23,7 +25,25 @@ namespace PhotoGalleryUploader
             get { return this._localIsBusy; }
             set { SetProperty(ref _localIsBusy, value); }
         }
-        
+
+
+        private ObservableCollection<StorageItemThumbnail> _thumbnails;
+
+        public ObservableCollection<StorageItemThumbnail> Thumbnails
+        {
+            get {
+                var thumbs = new List<StorageItemThumbnail>();
+                foreach(var file in SelectedFiles)
+                { 
+                var thumbnail = AsyncContext.Run(() => 
+                    file.GetThumbnailAsync(ThumbnailMode.PicturesView).AsTask()
+                );
+                thumbs.Add(thumbnail);
+                }
+                return new ObservableCollection<StorageItemThumbnail>(thumbs);
+            }
+            
+        }
 
         private ObservableCollection<StorageFile> _selectedFiles;
         public ObservableCollection<StorageFile> SelectedFiles
@@ -52,14 +72,19 @@ namespace PhotoGalleryUploader
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs args)
         {
             UploadCommand.RaiseCanExecuteChanged();
+            switch (args.PropertyName)
+            {
+                case nameof(SelectedFiles):
+                    RaisePropertyChanged(nameof(Thumbnails));
+                    break;
+            }
         }
 
         
 
         public DelegateCommand UploadCommand
         {
-            get;
-                
+            get;              
             
         }
 

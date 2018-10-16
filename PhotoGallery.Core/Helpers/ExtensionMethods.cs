@@ -28,9 +28,9 @@ namespace PhotoGalleryUploader.Core.Helpers
             return await folderPicker.PickSingleFolderAsync();
         }
 
-        public static IEnumerable<List<T>> CreateBatches<T>(List<T> locations, int nSize = 30)
+        public static IEnumerable<List<T>> CreateBatches<T>(this List<T> locations, int nSize = 30, int startingIndex = 0)
         {
-            for (int i = 0; i < locations.Count; i += nSize)
+            for (int i = startingIndex; i < locations.Count; i += nSize)
             {
                 yield return locations.GetRange(i, Math.Min(nSize, locations.Count - i));
             }

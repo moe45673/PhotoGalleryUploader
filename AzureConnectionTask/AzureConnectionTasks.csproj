@@ -114,6 +114,9 @@
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.1.9</Version>
     </PackageReference>
+    <PackageReference Include="Nito.AsyncEx">
+      <Version>4.0.1</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PhotoGallery.Core\PhotoGallery.Core.csproj">
