@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28010.2046
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotoGalleryUploader", "PhotoGalleryUploader\PhotoGalleryUploader.csproj", "{EADE109F-6043-4522-AB43-A1A68ADF2AA1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureConnectionTasks", "AzureConnectionTask\AzureConnectionTasks.csproj", "{73E33B1C-BD8A-4122-9B3F-7A4059D8B2CD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackgroundTasks", "AzureConnectionTask\BackgroundTasks.csproj", "{73E33B1C-BD8A-4122-9B3F-7A4059D8B2CD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotoGallery.Core", "PhotoGallery.Core\PhotoGallery.Core.csproj", "{3A2EDBFC-E11E-4021-95E9-16588B54BFB8}"
 EndProject

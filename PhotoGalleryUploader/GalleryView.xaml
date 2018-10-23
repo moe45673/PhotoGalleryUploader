@@ -52,11 +52,13 @@
         </Grid.ColumnDefinitions>
             
         <CommandBar Grid.ColumnSpan="2">
+            
+            <AppBarSeparator/>
             <AppBarButton Content="UploadToCloud" Command="{x:Bind ViewModel.UploadCommand}" />
             <AppBarSeparator/>
             <AppBarButton Content="Select Folder" Click="OpenFolderButtonClicked"/>
         </CommandBar>
-        <TextBlock Grid.Row="1" x:Name="LocalFolder" Text="{x:Bind ViewModel.FolderPath}"/>
+        <TextBlock Grid.Row="1" x:Name="LocalFolder" Text="{Binding ViewModel.FolderPath, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
         
         <controls:AdaptiveGridView Grid.Row="2" ItemHeight="200" DesiredWidth="300" 
                                    Margin="5"

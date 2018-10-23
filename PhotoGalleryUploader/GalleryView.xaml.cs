@@ -24,11 +24,9 @@ namespace PhotoGalleryUploader
 
     public sealed partial class GalleryView : Page
     {
-        public GalleryViewModel ViewModel { get; private set; }
+        public GalleryViewModel ViewModel { get; private set; }       
 
-        public readonly StorageItemAccessList futureAccessList = StorageApplicationPermissions.FutureAccessList;
-
-        private bool isFetching { get; set; }
+        //private bool isFetching { get; set; }
 
         public GalleryView()
         {
@@ -37,41 +35,35 @@ namespace PhotoGalleryUploader
             DataContextChanged += (sender, events) =>
             {
                 ViewModel = DataContext as GalleryViewModel;
-
+                //ViewModel.PropertyChanged -= OnPropertyChanged;
+                //ViewModel.PropertyChanged += OnPropertyChanged;
 
             };
 
         }
 
+        //private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        //{
+        //    switch (e.PropertyName)
+        //    {
+        //        case nameof(ViewModel.FolderPath):
+        //            futureAccessList.AddOrReplace("PickedImageFolder", selectedFolder, ViewModel.FolderPath);
+        //            break;
+        //    }
+        //}
+
         private async void OpenFolderButtonClicked(object sender, RoutedEventArgs e)
         {
-            ViewModel.LocalIsBusy = true;
+            
             var selectedFolder = await HelperMethods.ChooseFolderAsync();
 
             if (selectedFolder != null)
             {
-                //    // Application now has read/write access to all contents in the picked folder
-                //    // (including other sub-folder contents)
-                ViewModel.FolderPath = selectedFolder.Path;
-
-                futureAccessList.AddOrReplace("PickedImageFolder", selectedFolder, ViewModel.FolderPath);
-
-                var options = new QueryOptions(CommonFileQuery.DefaultQuery, FileExtensions.Image);
-
-
-                if (selectedFolder.AreQueryOptionsSupported(options))
-                {
-                    uint index = 0;
-                    const uint stepSize = 100;
-
-                    var k = selectedFolder.CreateFileQueryWithOptions(options);
-                    var result = await k.GetFilesAsync(index, stepSize);
-
-                    ViewModel.SelectedFiles = new ObservableCollection<StorageFile>(result);
-
-                }
+                ViewModel.SelectFolderCommand.Execute(selectedFolder);
+                
+                
             }
-            ViewModel.LocalIsBusy = false;
+            
 
         }
     }

@@ -106,8 +106,11 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="BackgroundTasks\BackgroundTaskCallback.cs" />
+    <Compile Include="BackgroundTasks\BackgroundTaskHelperBase.cs" />
     <Compile Include="Helpers\Configurations.cs" />
     <Compile Include="Helpers\ExtensionMethods.cs" />
+    <Compile Include="BackgroundTasks\IBackgroundTaskCallbacks.cs" />
     <Compile Include="MVVM\BindableBase.cs" />
     <Compile Include="MVVM\DelegateCommand.cs" />
     <Compile Include="MVVM\Helpers\DelegateCommandBAse.cs" />

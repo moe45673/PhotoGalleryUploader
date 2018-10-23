@@ -28,12 +28,29 @@ namespace PhotoGalleryUploader.Core.Helpers
             return await folderPicker.PickSingleFolderAsync();
         }
 
-        public static IEnumerable<List<T>> CreateBatches<T>(this List<T> locations, int nSize = 30, int startingIndex = 0)
+        public static async Task<IEnumerable<List<T>>> CreateBatchesAsync<T>(this List<T> locations, int nSize = 30, int startingIndex = 0)
+        {            
+            return await Task.Run(() =>
+            {
+                IEnumerable<List<T>> Batches = new List<List<T>>();
+                for (int i = startingIndex; i < locations.Count; i += nSize)
+                {
+                    Batches.ElementAt(i).AddRange(locations.GetRange(i, Math.Min(nSize, locations.Count - i)));
+                }
+                return Batches;
+            }).ConfigureAwait(false);                
+        }
+
+        public static IEnumerable<List<T>> CreateBatches<T>(this List<T> locations, int nSize = AppConstants.BatchSize, int startingIndex = 0)
         {
+            IEnumerable<List<T>> Batches = new List<List<T>>();
             for (int i = startingIndex; i < locations.Count; i += nSize)
             {
-                yield return locations.GetRange(i, Math.Min(nSize, locations.Count - i));
+                Batches.ElementAt(i).AddRange(locations.GetRange(i, Math.Min(nSize, locations.Count - i)));
             }
+            return Batches;
         }
+
+
     }
 }
