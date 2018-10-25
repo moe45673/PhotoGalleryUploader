@@ -117,14 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AzureStorageConnection" xml:space="preserve">
-    <value>DefaultEndpointsProtocol=https;AccountName=testphotogallery;AccountKey=7+E8QNDGcCV0L0V+8YClIMF+YsvR3lHkS/vsGYG1yjOaG05LnnV9qOhJ4NxfSiIjT0BevFNGExAWFfxlzCwmgA==;EndpointSuffix=core.windows.net</value>
-  </data>
   <data name="CannotRegisterCompositeCommandInItself" xml:space="preserve">
     <value>Cannot register a CompositeCommand in itself.</value>
   </data>
   <data name="CannotRegisterSameCommandTwice" xml:space="preserve">
     <value>Cannot register the same command twice in the same CompositeCommand.</value>
+  </data>
+  <data name="connectionstring" xml:space="preserve">
+    <value>DefaultEndpointsProtocol=https;AccountName=testphotogallery;AccountKey=7+E8QNDGcCV0L0V+8YClIMF+YsvR3lHkS/vsGYG1yjOaG05LnnV9qOhJ4NxfSiIjT0BevFNGExAWFfxlzCwmgA==;EndpointSuffix=core.windows.net</value>
   </data>
   <data name="CyclicDependencyFound" xml:space="preserve">
     <value>At least one cyclic dependency has been found in the module catalog. Cycles in the module dependencies must be avoided.</value>

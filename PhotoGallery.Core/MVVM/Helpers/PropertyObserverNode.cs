@@ -5,7 +5,7 @@ using System.Reflection;
 namespace PhotoGalleryUploader.Core.MVVM
 {
     /// <summary>
-    /// Represents each node of nested properties expression and takes care of 
+    /// Represents each node of nested properties expression and takes care of
     /// subscribing/unsubscribing INotifyPropertyChanged.PropertyChanged listeners on it.
     /// </summary>
     internal class PropertyObserverNode

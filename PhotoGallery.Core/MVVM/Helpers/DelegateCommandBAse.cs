@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
-using System.Windows.Input;
 using System.Threading;
+using System.Windows.Input;
 using Windows.ApplicationModel.Resources.Core;
 
 namespace PhotoGalleryUploader.Core.MVVM
@@ -20,6 +19,7 @@ namespace PhotoGalleryUploader.Core.MVVM
         private readonly HashSet<string> _observedPropertiesExpressions = new HashSet<string>();
         protected readonly ResourceContext resourceContext;
         protected readonly ResourceMap resourceMap;
+
         /// <summary>
         /// Creates a new instance of a <see cref="DelegateCommandBase"/>, specifying both the execute action and the can execute function.
         /// </summary>
@@ -36,7 +36,7 @@ namespace PhotoGalleryUploader.Core.MVVM
         public virtual event EventHandler CanExecuteChanged;
 
         /// <summary>
-        /// Raises <see cref="ICommand.CanExecuteChanged"/> so every 
+        /// Raises <see cref="ICommand.CanExecuteChanged"/> so every
         /// command invoker can requery <see cref="ICommand.CanExecute"/>.
         /// </summary>
         protected virtual void OnCanExecuteChanged()
@@ -112,7 +112,7 @@ namespace PhotoGalleryUploader.Core.MVVM
         /// <value><see langword="true" /> if the object is active; otherwise <see langword="false" />.</value>
         public bool IsActive
         {
-            get { return _isActive; }
+            get => _isActive;
             set
             {
                 if (_isActive != value)
@@ -136,6 +136,6 @@ namespace PhotoGalleryUploader.Core.MVVM
             IsActiveChanged?.Invoke(this, EventArgs.Empty);
         }
 
-        #endregion
+        #endregion IsActive
     }
 }

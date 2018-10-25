@@ -4,14 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3A2EDBFC-E11E-4021-95E9-16588B54BFB8}</ProjectGuid>
+    <ProjectGuid>{C35227AC-08F4-46B2-AD07-07280759AE37}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PhotoGallery.Core</RootNamespace>
-    <AssemblyName>PhotoGallery.Core</AssemblyName>
+    <RootNamespace>PhotoGallery.Azure</RootNamespace>
+    <AssemblyName>PhotoGallery.Azure</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.17134.0</TargetPlatformVersion>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.17763.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.15063.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
@@ -106,29 +106,23 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="BackgroundTasks\BackgroundTaskCallback.cs" />
-    <Compile Include="BackgroundTasks\BackgroundTaskHelperBase.cs" />
-    <Compile Include="BackgroundTasks\IBackgroundTaskCallbacks.cs" />
-    <Compile Include="Helpers\Configurations.cs" />
-    <Compile Include="Helpers\ExtensionMethods.cs" />
-    <Compile Include="MVVM\BindableBase.cs" />
-    <Compile Include="MVVM\DelegateCommand.cs" />
-    <Compile Include="MVVM\Helpers\DelegateCommandBAse.cs" />
-    <Compile Include="MVVM\Helpers\DelegateCommand{T}.cs" />
-    <Compile Include="MVVM\Helpers\IActiveAware.cs" />
-    <Compile Include="MVVM\Helpers\PropertyObserver.cs" />
-    <Compile Include="MVVM\Helpers\PropertyObserverNode.cs" />
-    <Compile Include="MVVM\Helpers\PropertySupport.cs" />
+    <Compile Include="AzureLocalProxy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Properties\PhotoGallery.Core.rd.xml" />
+    <EmbeddedResource Include="Properties\PhotoGallery.Azure.rd.xml" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.1.9</Version>
     </PackageReference>
-    <PackageReference Include="Nito.AsyncEx">
-      <Version>4.0.1</Version>
+    <PackageReference Include="WindowsAzure.Storage">
+      <Version>9.3.2</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PhotoGallery.Core\PhotoGallery.Core.csproj">
+      <Project>{3a2edbfc-e11e-4021-95e9-16588b54bfb8}</Project>
+      <Name>PhotoGallery.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

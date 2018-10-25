@@ -21,7 +21,7 @@ namespace PhotoGalleryUploader.Core.MVVM
     /// {
     ///     this.submitCommand = new DelegateCommand&lt;int?&gt;(this.Submit, this.CanSubmit);
     /// }
-    /// 
+    ///
     /// private bool CanSubmit(int? customerId)
     /// {
     ///     return (customerId.HasValue &amp;&amp; customers.Contains(customerId.Value));
@@ -31,8 +31,8 @@ namespace PhotoGalleryUploader.Core.MVVM
     /// </remarks>
     public class DelegateCommand<T> : DelegateCommandBase
     {
-        readonly Action<T> _executeMethod;
-        Func<T, bool> _canExecuteMethod;
+        private readonly Action<T> _executeMethod;
+        private Func<T, bool> _canExecuteMethod;
 
         /// <summary>
         /// Initializes a new instance of <see cref="DelegateCommand{T}"/>.
@@ -58,7 +58,7 @@ namespace PhotoGalleryUploader.Core.MVVM
 
             TypeInfo genericTypeInfo = typeof(T).GetTypeInfo();
 
-            // DelegateCommand allows object or Nullable<>.  
+            // DelegateCommand allows object or Nullable<>.
             // note: Nullable<> is a struct so we cannot use a class constraint.
             if (genericTypeInfo.IsValueType)
             {

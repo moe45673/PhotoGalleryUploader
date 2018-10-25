@@ -3,8 +3,6 @@ using System.Linq.Expressions;
 using System.Reflection;
 using Windows.ApplicationModel.Resources.Core;
 
-
-
 namespace PhotoGalleryUploader.Core.MVVM
 {
     ///<summary>
@@ -64,6 +62,5 @@ namespace PhotoGalleryUploader.Core.MVVM
 
             return memberExpression.Member.Name;
         }
-
     }
 }

@@ -11,9 +11,9 @@ namespace PhotoGalleryUploader.Core.MVVM
     /// <see cref="DelegateCommand{T}"/>
     public class DelegateCommand : DelegateCommandBase
     {
-        Action _executeMethod;
-        Func<bool> _canExecuteMethod;
-        
+        private Action _executeMethod;
+        private Func<bool> _canExecuteMethod;
+
         /// <summary>
         /// Creates a new instance of <see cref="DelegateCommand"/> with the <see cref="Action"/> to invoke on execution.
         /// </summary>
@@ -21,7 +21,6 @@ namespace PhotoGalleryUploader.Core.MVVM
         public DelegateCommand(Action executeMethod)
             : this(executeMethod, () => true)
         {
-
         }
 
         /// <summary>
@@ -33,8 +32,6 @@ namespace PhotoGalleryUploader.Core.MVVM
         public DelegateCommand(Action executeMethod, Func<bool> canExecuteMethod)
             : base()
         {
-            
-
             if (executeMethod == null || canExecuteMethod == null)
                 throw new ArgumentNullException(nameof(executeMethod), resourceMap.GetValue("DelegateCommandDelegatesCannotBeNull", resourceContext).ValueAsString);
 

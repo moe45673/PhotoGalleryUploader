@@ -29,7 +29,7 @@ namespace PhotoGalleryUploader
     #region Aliases
     using IncrementalLoadingStorageItemCollection =
         IncrementalLoadingCollection<ThumbnailSource, StorageItemThumbnail>;
-    
+
     #endregion
 
     public class GalleryViewModel : BindableBase
@@ -37,7 +37,7 @@ namespace PhotoGalleryUploader
 
         #region Fields
         private readonly CoreDispatcher Dispatcher;
-        private readonly ThreadPoolTimer _periodicTimer = ThreadPoolTimer.CreatePeriodicTimer(new TimerElapsedHandler(PeriodicTimerCallback), TimeSpan.FromSeconds(1));
+        //private readonly ThreadPoolTimer _periodicTimer = ThreadPoolTimer.CreatePeriodicTimer(new TimerElapsedHandler(PeriodicTimerCallback), TimeSpan.FromSeconds(1));
         #endregion
 
         #region Commands
@@ -81,8 +81,8 @@ namespace PhotoGalleryUploader
 
         public BackgroundTaskFacade UploadTask
         {
-            get { return _uploadTask; }
-            set { SetProperty(ref _uploadTask, value); }
+            get => _uploadTask;
+            set => SetProperty(ref _uploadTask, value);
         }
 
 
@@ -91,10 +91,10 @@ namespace PhotoGalleryUploader
 
         public uint UploadProgress
         {
-            get { return this._uploadProgress; }
-            set { SetProperty(ref _uploadProgress, value); }
+            get => this._uploadProgress;
+            set => SetProperty(ref _uploadProgress, value);
         }
-        
+
 
         #endregion
 
@@ -115,8 +115,8 @@ namespace PhotoGalleryUploader
 
         public uint Progress
         {
-            get { return this._progress; }
-            set { SetProperty(ref _progress, value); }
+            get => this._progress;
+            set => SetProperty(ref _progress, value);
         }
 
         private void Initialize()
@@ -125,23 +125,25 @@ namespace PhotoGalleryUploader
             {
                 if (task.Value.Name == AppConstants.UploadTaskName)
                 {
-                    UploadTask = new BackgroundTaskFacade(task.Value, 
-                        (reg1, args1)=> {
+                    UploadTask = new BackgroundTaskFacade(task.Value,
+                        (reg1, args1) =>
+                        {
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                             Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                             {
-                                if(args1.Progress < 100)
+                                if (args1.Progress < 100)
                                 {
                                     Progress += 10;
                                 }
-                                
+
                             }
-                            
+
                         );
 #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-                        }, (reg2, args2) => {
-                                        
-                    });
+                        }, (reg2, args2) =>
+                        {
+
+                        });
 
                     UploadTask.PropertyChanged -= OnPropertyChanged;
                     UploadTask.PropertyChanged += OnPropertyChanged;
@@ -150,8 +152,8 @@ namespace PhotoGalleryUploader
                 }
             }
 
-            
-            
+
+
         }
 
 
@@ -170,22 +172,22 @@ namespace PhotoGalleryUploader
             }
             else
             {
-                _periodicTimer.Cancel();
+                //_periodicTimer.Cancel();
 
-                var key = _taskInstance.Task.Name;
+                //var key = _taskInstance.Task.Name;
 
-                //
-                // Record that this background task ran.
-                //
-                String taskStatus = (_progress < 100) ? "Canceled with reason: " + _cancelReason.ToString() : "Completed";
-                var settings = ApplicationData.Current.LocalSettings;
-                settings.Values[key] = taskStatus;
-                Debug.WriteLine("Background " + _taskInstance.Task.Name + settings.Values[key]);
+                ////
+                //// Record that this background task ran.
+                ////
+                //String taskStatus = (_progress < 100) ? "Canceled with reason: " + _cancelReason.ToString() : "Completed";
+                //var settings = ApplicationData.Current.LocalSettings;
+                //settings.Values[key] = taskStatus;
+                //Debug.WriteLine("Background " + _taskInstance.Task.Name + settings.Values[key]);
 
-                //
-                // Indicate that the background task has completed.
-                //
-                _deferral.Complete();
+                ////
+                //// Indicate that the background task has completed.
+                ////
+                //_deferral.Complete();
             }
         }
 
@@ -201,8 +203,8 @@ namespace PhotoGalleryUploader
                     Thumbnails = new IncrementalLoadingStorageItemCollection(source, AppConstants.BatchSize);
                     break;
 
-                    
-                    
+
+
             }
 
         }
@@ -225,73 +227,83 @@ namespace PhotoGalleryUploader
                 var k = selectedFolder.CreateFileQueryWithOptions(options);
 
                 var result = await k.GetFilesAsync();
-
-                SelectedFiles = new ObservableCollection<StorageFile>(result);
+                var imageResults = result.Where(file => string.Equals(
+                                                                file.ContentType.Substring(0, 5),
+                                                                "image"
+                                                                )
+                                                );
+                SelectedFiles = new ObservableCollection<StorageFile>(imageResults);
             }
             LocalIsBusy = false;
-        }       
+        }
 
         private bool CanUpload()
         {
             return SelectedFiles.Any();
         }
 
-        private void Upload()
+        private async void Upload()
         {
-            var trigger = new ApplicationTrigger();            
-            UploadTask = new BackgroundTaskFacade("Tasks.UploadFileTask", AppConstants.UploadTaskName, trigger, null, requiresBackgroundAccess: true);
+            //            var trigger = new ApplicationTrigger();
+            //            UploadTask = new BackgroundTaskFacade("Tasks.UploadFileTask", AppConstants.UploadTaskName, trigger, null, requiresBackgroundAccess: true);
 
-            UploadTask.AttachProgressAndCompletedHandlers(
-                (task, args) => //OnProgress
-                {
-                    {
-#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-                        Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                        {
-                            if (args.Progress < 100)
-                            {
+            //            UploadTask.AttachProgressAndCompletedHandlers(
+            //                (task, args) => //OnProgress
 
-                                Progress = Math.Min(100, args.Progress + 10);
-                                
-                            }
-                            else
-                            {
+            //                {
+            //#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            //                        Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            //                        {
+            //                            if (args.Progress < 100)
+            //                            {
 
-                            }
+            //                                Progress = Math.Min(100, args.Progress + 10);
 
-                        }
+            //                            }
+            //                            else
+            //                            {
 
-                    );
-#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-                    }
-                }, 
-                (task, args) => //OnCompleted
-                {
+            //                            }
 
-                }
-            );
+            //                        }
 
-            UploadTask.PropertyChanged -= OnPropertyChanged;
-            UploadTask.PropertyChanged += OnPropertyChanged;
+            //                    );
+            //#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
 
+            //                    },
+            //                (task, args) => //OnCompleted
+            //                {
 
+            //                }
+            //            );
 
-            CloudStorageAccount account;
-            var connMap = ResourceManager.Current.MainResourceMap.GetSubtree("Resources");
-            var resContext = ResourceContext.GetForViewIndependentUse();
-            var conn = connMap.GetValue("AzureStorageConnection", resContext).ValueAsString;
-            if (CloudStorageAccount.TryParse(conn, out account))
+            //UploadTask.PropertyChanged -= OnPropertyChanged;
+            //UploadTask.PropertyChanged += OnPropertyChanged;
+            try
+            {
+                PhotoGallery.Azure.AzureLocalProxy.UploadImages(SelectedFiles);
+            }
+            catch (Exception e)
             {
                 ;
             }
-            else
-            {
-                // Otherwise, let the user know that they need to define the environment variable.
-                Console.WriteLine(
-                    "A connection string has not been defined in the system environment variables. " +
-                    "Add a environment variable named 'storageconnectionstring' with your storage " +
-                    "connection string as a value.");
-            }
+
+            //CloudStorageAccount account;
+            //var connMap = ResourceManager.Current.MainResourceMap.GetSubtree("Resources");
+            //var resContext = ResourceContext.GetForViewIndependentUse();
+            //var conn = connMap.GetValue("AzureStorageConnection", resContext).ValueAsString;
+            //if (CloudStorageAccount.TryParse(conn, out account))
+            //{
+            //    ;
+            //}
+            //else
+            //{
+            //    // Otherwise, let the user know that they need to define the environment variable.
+            //    Console.WriteLine(
+            //        "A connection string has not been defined in the system environment variables. " +
+            //        "Add a environment variable named 'storageconnectionstring' with your storage " +
+            //        "connection string as a value.");
+            //}
         }
         #endregion
 

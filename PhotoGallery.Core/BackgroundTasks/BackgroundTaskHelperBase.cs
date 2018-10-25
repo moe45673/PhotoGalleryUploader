@@ -1,9 +1,4 @@
-﻿using PhotoGallery.Core.BackgroundTasks;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Windows.ApplicationModel.Background;
 using Windows.Storage;
 
@@ -11,13 +6,12 @@ namespace PhotoGallery.Core.Helpers
 {
     public abstract class BackgroundTaskHelperBase
     {
-
-
         #region quick and dirty TaskGroup
+
         protected class TaskDictionary : Dictionary<string, TaskMetaData>
         {
             /// <summary>
-            /// Hides base Add() method. 
+            /// Hides base Add() method.
             /// </summary>
             /// <param name="key">Always equal to the Taskname field from <paramref name="value"/></param>
             /// <param name="value"></param>
@@ -30,7 +24,6 @@ namespace PhotoGallery.Core.Helpers
             {
                 Add(value.TaskName, value.TaskProgress, value.IsRegistered, value.RequiresBackgroundAccess);
             }
-
 
             public virtual void Add(string taskName, string taskProgress = "", bool isRegistered = false, bool requiresBackgroundAccess = false)
             {
@@ -46,10 +39,9 @@ namespace PhotoGallery.Core.Helpers
         protected struct TaskMetaData
         {
             public string TaskName { get; }
-            public string TaskProgress { get; set;}
-            public bool IsRegistered { get; set;}
-            public bool RequiresBackgroundAccess { get; set;}
-
+            public string TaskProgress { get; set; }
+            public bool IsRegistered { get; set; }
+            public bool RequiresBackgroundAccess { get; set; }
 
             public TaskMetaData(string taskName, string taskProgress = "", bool isRegistered = false, bool requiresBackgroundAccess = false)
             {
@@ -57,9 +49,7 @@ namespace PhotoGallery.Core.Helpers
                 TaskProgress = taskProgress;
                 IsRegistered = isRegistered;
                 RequiresBackgroundAccess = requiresBackgroundAccess;
-                
             }
-
         }
 
         protected static TaskDictionary _tasks;
@@ -69,13 +59,13 @@ namespace PhotoGallery.Core.Helpers
             get => _tasks;
             set => _tasks = value;
         }
-        #endregion
 
+        #endregion quick and dirty TaskGroup
 
         static BackgroundTaskHelperBase()
         {
             _tasks = new TaskDictionary();
-        } 
+        }
 
         /// <summary>
         /// Register a background task with the specified taskEntryPoint, name, trigger,
@@ -190,10 +180,8 @@ namespace PhotoGallery.Core.Helpers
         /// <param name="registered">TRUE if registered, FALSE if unregistered.</param>
         public static void UpdateBackgroundTaskRegistrationStatus(string name, bool registered)
         {
-
             var task = Tasks[name];
             task.IsRegistered = registered;
-
         }
 
         /// <summary>
@@ -229,4 +217,3 @@ namespace PhotoGallery.Core.Helpers
         }
     }
 }
-

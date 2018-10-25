@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Windows.Foundation;
 using Windows.Storage;
 using Windows.Storage.FileProperties;
 
@@ -11,7 +9,6 @@ namespace PhotoGalleryUploader.Core.Helpers
 {
     public static class ExtensionMethods
     {
-
         public async static Task<StorageItemThumbnail> ConvertToThumbnailAsync(this StorageFile file, uint requestedSize = 300, ThumbnailMode mode = ThumbnailMode.SingleItem, ThumbnailOptions thumbnailOptions = ThumbnailOptions.UseCurrentScale)
         {
             return await file.GetThumbnailAsync(mode, requestedSize, thumbnailOptions).AsTask().ConfigureAwait(false);
@@ -29,7 +26,7 @@ namespace PhotoGalleryUploader.Core.Helpers
         }
 
         public static async Task<IEnumerable<List<T>>> CreateBatchesAsync<T>(this List<T> locations, int nSize = 30, int startingIndex = 0)
-        {            
+        {
             return await Task.Run(() =>
             {
                 IEnumerable<List<T>> Batches = new List<List<T>>();
@@ -38,7 +35,7 @@ namespace PhotoGalleryUploader.Core.Helpers
                     Batches.ElementAt(i).AddRange(locations.GetRange(i, Math.Min(nSize, locations.Count - i)));
                 }
                 return Batches;
-            }).ConfigureAwait(false);                
+            }).ConfigureAwait(false);
         }
 
         public static IEnumerable<List<T>> CreateBatches<T>(this List<T> locations, int nSize = AppConstants.BatchSize, int startingIndex = 0)
@@ -50,7 +47,5 @@ namespace PhotoGalleryUploader.Core.Helpers
             }
             return Batches;
         }
-
-
     }
 }

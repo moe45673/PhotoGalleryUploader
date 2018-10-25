@@ -1,13 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.ApplicationModel.Background;
-using Windows.UI.Core;
-using Windows.UI.Xaml;
-using PhotoGalleryUploader.Core.MVVM;
-using Windows.System.Threading;
 
 namespace PhotoGallery.Core.BackgroundTasks
 {
@@ -29,7 +21,5 @@ namespace PhotoGallery.Core.BackgroundTasks
         }
 
         public IBackgroundTaskRegistration TaskRegistration { get; protected set; }
-
-
     }
 }

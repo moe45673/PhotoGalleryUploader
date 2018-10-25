@@ -112,7 +112,7 @@
       <SubType>Designer</SubType>
     </AppxManifest>
     <Content Include="app.config" />
-    <None Include="Connected Services\AzureStorage1\ConnectedService.json" />
+    <None Include="packages.config" />
     <None Include="PhotoGalleryUploader_TemporaryKey.pfx" />
     <PRIResource Include="Properties\Resources.resw">
       <SubType>Designer</SubType>
@@ -156,12 +156,9 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\AzureConnectionTask\BackgroundTasks.csproj">
-      <Project>{73e33b1c-bd8a-4122-9b3f-7a4059d8b2cd}</Project>
-      <Name>BackgroundTasks</Name>
+    <ProjectReference Include="..\PhotoGallery.Azure\PhotoGallery.Azure.csproj">
+      <Project>{c35227ac-08f4-46b2-ad07-07280759ae37}</Project>
+      <Name>PhotoGallery.Azure</Name>
     </ProjectReference>
     <ProjectReference Include="..\PhotoGallery.Core\PhotoGallery.Core.csproj">
       <Project>{3a2edbfc-e11e-4021-95e9-16588b54bfb8}</Project>

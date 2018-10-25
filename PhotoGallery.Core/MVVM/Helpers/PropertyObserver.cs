@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 namespace PhotoGalleryUploader.Core.MVVM
 {
     /// <summary>
-    /// Provide a way to observe property changes of INotifyPropertyChanged objects and invokes a 
+    /// Provide a way to observe property changes of INotifyPropertyChanged objects and invokes a
     /// custom action when the PropertyChanged event is fired.
     /// </summary>
     internal class PropertyObserver
@@ -51,7 +51,7 @@ namespace PhotoGalleryUploader.Core.MVVM
         }
 
         /// <summary>
-        /// Observes a property that implements INotifyPropertyChanged, and automatically calls a custom action on 
+        /// Observes a property that implements INotifyPropertyChanged, and automatically calls a custom action on
         /// property changed notifications. The given expression must be in this form: "() => Prop.NestedProp.PropToObserve".
         /// </summary>
         /// <param name="propertyExpression">Expression representing property to be observed. Ex.: "() => Prop.NestedProp.PropToObserve".</param>

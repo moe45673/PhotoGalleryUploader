@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PhotoGallery.Azure;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -44,6 +45,7 @@ namespace PhotoGalleryUploader
         {
             Frame rootFrame = Window.Current.Content as Frame;
 
+            var temp = new AzureLocalProxy();
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
             if (rootFrame == null)

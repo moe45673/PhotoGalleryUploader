@@ -4,7 +4,7 @@
   <mp:PhoneIdentity PhoneProductId="d7c9413c-f040-44d4-b960-3ff9c74d186d" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>PhotoGalleryUploader</DisplayName>
-    <PublisherDisplayName>mosh1</PublisherDisplayName>
+    <PublisherDisplayName>Moshe Tenenbaum</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Dependencies>
