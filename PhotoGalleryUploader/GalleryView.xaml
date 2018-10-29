@@ -58,8 +58,9 @@
             <AppBarSeparator/>
             <AppBarButton Content="Select Folder" Click="OpenFolderButtonClicked"/>
         </CommandBar>
-        <TextBlock Grid.Row="1" x:Name="LocalFolder" Text="{Binding ViewModel.FolderPath, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
-        
+        <TextBlock Grid.Row="1" x:Name="LocalFolder" Text="{Binding FolderPath, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding IsUploaded, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+
         <controls:AdaptiveGridView Grid.Row="2" ItemHeight="200" DesiredWidth="300" 
                                    Margin="5"
                                    ScrollViewer.IsHorizontalRailEnabled="False"

@@ -2,6 +2,7 @@
 using Microsoft.WindowsAzure.Storage.Blob;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Resources;
 using Windows.Storage;
@@ -19,34 +20,47 @@ namespace PhotoGallery.Azure
             //UploadImages(new List<StorageFile>());
         }
 
-        public static async Task UploadImages(IList<StorageFile> files)
+        public static async Task<bool> UploadImages(IList<StorageFile> files)
         {
+            
+            var tasks = new List<Task>();
             if (storageAccount != null)
             {
                 var cloudBlobClient = storageAccount.CreateCloudBlobClient();
                 var blobContainer = cloudBlobClient.GetContainerReference("testimages");
-                try
-                { 
-                if(await blobContainer.CreateIfNotExistsAsync())
-                    {
-                        var permissions = new BlobContainerPermissions { PublicAccess = BlobContainerPublicAccessType.Blob };
-                        await blobContainer.SetPermissionsAsync(permissions);
+                //try
+                //{
+                await blobContainer.CreateIfNotExistsAsync();
+                Debug.WriteLine("Container Created!");
+                var permissions = new BlobContainerPermissions { PublicAccess = BlobContainerPublicAccessType.Blob };
+                await blobContainer.SetPermissionsAsync(permissions);
+                Debug.WriteLine("Permissions set!");
 
-
-                        for (int i = 0; i < files.Count; i++)
-                        {
-                            var blockBlob = blobContainer.GetBlockBlobReference($"ImageBlob{i}");
-                            blockBlob.Properties.ContentType = files[i].ContentType;
-                            await blockBlob.UploadFromFileAsync(files[i]);
-                        }
-                    }
-                }catch(Exception e)
+                for (int i = 0; i < files.Count; i++)
                 {
-                    ;
+                    var blockBlob = blobContainer.GetBlockBlobReference($"ImageBlob{i}");
+                    blockBlob.Properties.ContentType = files[i].ContentType;
+                    tasks.Add(blockBlob.UploadFromFileAsync(files[i]));
+                    Debug.WriteLine($"Went through for loop {i + 1} times out of {files.Count}!");
                 }
+                //}
+                //catch (Exception e)
+                //{
+                //    var hello = e.Message;
+                //}
 
-               
             }
+            Debug.WriteLine("Got to end of if statement!");
+            if (tasks.Count > 0)
+            {
+                Debug.WriteLine("tasks.Count > 0!");
+               var result = Task.WhenAll(tasks);
+                await result;
+                Debug.WriteLine("Finished Running through all tasks!");
+                return !result.IsCanceled && !result.IsFaulted && result.IsCompleted;
+
+            }
+            return false;
         }
     }
 }

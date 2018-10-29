@@ -49,6 +49,15 @@ namespace PhotoGalleryUploader
 
         #region Properties
 
+
+        private bool _isUploaded;
+
+        public bool IsUploaded
+        {
+            get { return this._isUploaded; }
+            set { SetProperty(ref _isUploaded, value); }
+        }
+
         private bool _localIsBusy;
         public bool LocalIsBusy
         {
@@ -281,7 +290,8 @@ namespace PhotoGalleryUploader
             //UploadTask.PropertyChanged += OnPropertyChanged;
             try
             {
-                PhotoGallery.Azure.AzureLocalProxy.UploadImages(SelectedFiles);
+                IsUploaded = await PhotoGallery.Azure.AzureLocalProxy.UploadImages(SelectedFiles);
+                ;
             }
             catch (Exception e)
             {
